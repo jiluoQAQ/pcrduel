@@ -498,9 +498,11 @@ def get_newgirl_list(gid):
 #增加角色经验
 def add_exp(gid,uid,cid,exp):
     CE = CECounter()
+    zslevel = CE._get_zhuansheng(gid, uid, cid)
+    expzf = 1+(zslevel/10)
     now_level = CE._get_card_level(gid, uid, cid)
     level_flag = 0
-    need_exp = (now_level+1)*100
+    need_exp = math.ceil((now_level+1)*100*expzf)
     exp_info = CE._get_card_exp(gid, uid, cid)
     now_exp = exp_info + exp
     if now_level>=CARD_LEVEL_MAX:
@@ -510,7 +512,7 @@ def add_exp(gid,uid,cid,exp):
     while now_exp>=need_exp:
         now_level = now_level+1
         now_exp = now_exp-need_exp
-        need_exp = (now_level+1)*100 
+        need_exp = math.ceil((now_level+1)*100*expzf)
         if now_level>=CARD_LEVEL_MAX:
             level_flag = 1
             last_exp = now_exp
@@ -758,8 +760,11 @@ def get_card_ce(gid,uid,cid):
         fashion_info = get_fashion_info(up_info)
         fashion_ce = fashion_info['add_ce']
     #获取角色等级
+    zslevel = CE._get_zhuansheng(gid, uid, cid)
+    zljcadd = zslevel*50
+    zlzf = 1+(zslevel/10)
     level_info = CE._get_card_level(gid, uid, cid)
-    level_ce = level_info*50
+    level_ce = level_info*50+level_info*zljcadd
     
     #获取角色穿戴装备列表
     equip_ce = 0
@@ -782,7 +787,7 @@ def get_card_ce(gid,uid,cid):
     addsrat = 1+starz/10
     #计算角色rank战力加成
     rank = CE._get_rank(gid, uid, cid)
-    card_ce=math.ceil((100+fashion_ce+level_ce*addsrat+favor_ce+equip_ce)*(1+rank/8))
+    card_ce=math.ceil((100+fashion_ce+level_ce*addsrat+favor_ce+equip_ce)*(1+rank/8)*zlzf)
     return card_ce
 
 #获取战力排行榜

@@ -3093,6 +3093,7 @@ async def my_fashion(bot, ev: CQEvent):
             duel._set_favor(gid,uid,cid,0)
         #获取角色星级
         cardstar = CE._get_cardstar(gid, uid, cid)
+        zllevel = CE._get_zhuansheng(gid,uid,cid)
         equip_list = ''
         equip_msg = ''
         dreeslist = CE._get_dress_list(gid, uid, cid)
@@ -3114,7 +3115,7 @@ async def my_fashion(bot, ev: CQEvent):
             up_msg=f"\n目前穿戴的时装是{up_name}\n"
         if lh_msg:
             lh_msg = f"\n您为{c.name}购买的时装有(只显示未穿的2件)："+lh_msg
-        msg = f'\n{c.name}目前的等级是{level_info}级，星级为{cardstar}星，rank等级为：{rank}级，战斗力为{card_ce}点\n{queen_msg}对你的好感是{favor}\n你们的关系是{relationship}\n“{text}”{equip_msg}{up_msg}{nvmes}{lh_msg}'
+        msg = f'\n{c.name}目前的等级是{level_info}级，{zllevel}转，星级为{cardstar}星，rank等级为：{rank}级，战斗力为{card_ce}点\n{queen_msg}对你的好感是{favor}\n你们的关系是{relationship}\n“{text}”{equip_msg}{up_msg}{nvmes}{lh_msg}'
     await bot.send(ev, msg, at_sender=True)
         
 @sv.on_prefix(['还原穿戴','取消穿戴'])

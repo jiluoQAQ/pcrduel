@@ -40,6 +40,7 @@ class CECounter:
         self._create_fragment()
         self._create_cardstar()
         self._create_gecha_add()
+        self._create_zhuansheng()
     
     def _connect(self):
         return sqlite3.connect(DUEL_DB_PATH)
@@ -683,3 +684,41 @@ class CECounter:
                 "SELECT CID,NUM FROM FRAGMENT WHERE GID=? AND UID=? AND NUM>0 ORDER BY CID", (gid, uid)
             ).fetchall()
         return r if r else {}
+        
+    #创建角色转生表
+    def _create_zhuansheng(self):
+        try:
+            self._connect().execute('''CREATE TABLE IF NOT EXISTS ZHUANSHENG
+                          (
+                           GID             INT    NOT NULL,
+                           UID             INT    NOT NULL,
+                           CID        INT    NOT NULL,
+                           NUM        INT    NOT NULL,
+                           PRIMARY KEY(GID, UID, CID));''')
+        except:
+            raise Exception('创建角色转生表发生错误')
+    
+    #获取角色转生等级
+    def _get_zhuansheng(self, gid, uid, cid):
+        try:
+            r = self._connect().execute("SELECT NUM FROM ZHUANSHENG WHERE GID=? AND UID=? AND CID=?", (gid, uid, cid)).fetchone()
+            if r is None:
+               return 0
+            return r[0]
+        except Exception as e:
+            raise Exception('错误:\n' + str(e))
+            return 0
+            
+    #角色转生
+    def _add_zhuansheng(self, gid, uid, cid):
+        now_num = self._get_zhuansheng(gid, uid, cid)
+        now_num = now_num + 1
+        with self._connect() as conn:
+            conn.execute(
+                "INSERT OR REPLACE INTO ZHUANSHENG (GID, UID, CID, NUM) VALUES (?, ?, ?, ?)",
+                (gid, uid, cid, now_num),
+            )
+            return now_num
+    
+    
+    

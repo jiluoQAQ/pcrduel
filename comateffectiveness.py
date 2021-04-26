@@ -39,16 +39,17 @@ async def gift_help(bot, ev: CQEvent):
 3. 查看绑定/查看战斗女友
 4. rank等级表/rank表 (查看rank等级提升需求)
 5. 升级rank/rank升级/提升rank +角色名 (升级女友的rank)
-6. 创建队伍+女友名(最多5名，用空格隔开)+队名+队伍名称 (保存队伍)
-7. 解散队伍+队伍名
-8. 我的队伍(查询我的队伍情况)
-9. 挂机修炼+女友名
-10. 结束修炼
-11. 我的经验池
-12. 分配经验+女友名+经验值
+6. 角色转生 +女友名(女友进行转生，等级、rank清零，基础战力加成提升)
+7. 创建队伍+女友名(最多5名，用空格隔开)+队名+队伍名称 (保存队伍)
+8. 解散队伍+队伍名
+9. 我的队伍(查询我的队伍情况)
+10. 挂机修炼+女友名
+11. 结束修炼
+12. 我的经验池
+13. 分配经验+女友名+经验值
 注:
 战力计算器：
-    基础战力 = 100 + 等级*50*(1+星级!/10) + 好感度*0.4 + 时装加成战力
+    基础战力 = 100 + 等级*(50+转生等级*50)*(1+星级!/10) + 好感度*0.4 + 时装加成战力
     女友战力 = 基础战力*(1+rank/8)
     最大rank等级为12级，达到r12可以增幅2.5倍战力
 ╚                                        ╝
@@ -2194,7 +2195,7 @@ async def equip_fenjie_n(bot, ev: CQEvent):
         await bot.finish(ev, '您还没有获得装备哦。', at_sender=True)
         
 @sv.on_prefix(['星尘兑换'])
-async def xngchen_change(bot, ev: CQEvent):
+async def xingchen_change(bot, ev: CQEvent):
     args = ev.message.extract_plain_text().split()
     gid = ev.group_id
     uid = ev.user_id
@@ -2572,7 +2573,7 @@ async def my_fragment_list(bot, ev: CQEvent):
         await bot.finish(ev, '您还没有获得角色碎片哦。', at_sender=True)
     
 @sv.on_prefix(['角色升星','星级提升'])
-async def xngchen_change(bot, ev: CQEvent):
+async def cardstar_up(bot, ev: CQEvent):
     args = ev.message.extract_plain_text().split()
     gid = ev.group_id
     uid = ev.user_id
@@ -2683,3 +2684,52 @@ async def star_help(bot, ev: CQEvent):
  '''
     await bot.send(ev, msg)
     
+    
+@sv.on_prefix(['角色转生'])
+async def card_zhuansheng(bot, ev: CQEvent):
+    args = ev.message.extract_plain_text().split()
+    gid = ev.group_id
+    uid = ev.user_id
+    CE = CECounter()
+    duel = DuelCounter()
+    if len(args)!=1:
+        await bot.finish(ev, '请输入 角色转生+女友名 中间用空格隔开。', at_sender=True)
+    name = args[0]
+    cid = chara.name2id(name)
+    if cid == 1000:
+        await bot.finish(ev, '请输入正确的女友名。', at_sender=True)
+    cidlist = duel._get_cards(gid, uid)
+    if cid not in cidlist:
+        await bot.finish(ev, '该女友不在你的身边哦。', at_sender=True)
+    zllevel = CE._get_zhuansheng(gid,uid,cid)
+    MAX_ZS = 5
+    if zllevel==MAX_ZS:
+        await bot.finish(ev, '该女友已经到最高转生等级，无法继续转生啦。', at_sender=True)
+    new_zl = zllevel + 1
+
+    nvmes = get_nv_icon(cid)
+    up_info = duel._get_fashionup(gid,uid,cid,0)
+    fashion_ce=0
+    up_icon=''
+    if up_info:
+        #获取穿戴时装所加的战斗力   
+        fashion_info = get_fashion_info(up_info)
+        up_icon = fashion_info['icon']
+    if up_icon:
+        nvmes=up_icon
+    level_info = CE._get_card_level(gid, uid, cid)
+    rank = CE._get_rank(gid, uid, cid)
+    if level_info>=100 and rank>=10:
+        CE._set_card_exp(gid,uid,cid)
+        CE._add_rank(gid,uid,cid)
+        CE._add_zhuansheng(gid,uid,cid)
+        await bot.send(ev, f'转生成功！\n您的女友{name}成功进行了{new_zl}转，等级变成了0级，rank变成了0级，基础战力加成提升了{nvmes}', at_sender=True)
+    else:
+        await bot.finish(ev, f'转生需要角色等级>=100，RANK>=10哦。您没有达到转生条件', at_sender=True)
+    
+
+
+
+
+
+
