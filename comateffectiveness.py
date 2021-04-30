@@ -39,7 +39,7 @@ async def gift_help(bot, ev: CQEvent):
 3. 查看绑定/查看战斗女友
 4. rank等级表/rank表 (查看rank等级提升需求)
 5. 升级rank/rank升级/提升rank +角色名 (升级女友的rank)
-6. 角色转生 +女友名(女友进行转生，等级、rank清零，基础战力加成提升)
+6. 角色转生 +女友名(女友进行转生，等级、rank清零，基础战力加成提升，升级所需经验提升)
 7. 创建队伍+女友名(最多5名，用空格隔开)+队名+队伍名称 (保存队伍)
 8. 解散队伍+队伍名
 9. 我的队伍(查询我的队伍情况)
@@ -258,16 +258,20 @@ async def up_rank(bot, ev: CQEvent):
 @sv.on_fullmatch(['战力榜','女友战力榜','战力排行榜'])
 async def girl_power_rank(bot, ev: CQEvent):
     ranking_list = get_power_rank(ev.group_id)
+    gid = ev.group_id
+    CE = CECounter()
     msg = '本群女友战力排行榜(仅展示rank>0的)：\n'
     if len(ranking_list)>0:
         rank = 1
         for girl in ranking_list:
-            if rank<=10:
+            if rank<=15:
                 user_card_dict = await get_user_card_dict(bot, ev.group_id)
                 rank1,power,uid,cid = girl
                 user_card = uid2card(uid, user_card_dict)
                 c = chara.fromid(cid)
-                msg += f'第{rank}名: {user_card}的 {c.name}(rank{rank1})，战斗力{power}点\n'
+                dengji = CE._get_card_level(gid, uid, cid)
+                zhuansheng = CE._get_zhuansheng(gid, uid, cid)
+                msg += f'第{rank}名: {user_card}的 {c.name}({dengji}级，{zhuansheng}转，rank{rank1})，战斗力{power}点\n'
             rank = rank+1
     else:
         msg += '暂无女友上榜'

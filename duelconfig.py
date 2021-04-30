@@ -313,6 +313,7 @@ def save_dlc_switch():
 
 bldalist = range(4700,4750)
 zjjblist = range(4500,4558)
+kgqgjlist = range(4800,4858)
 blhxlist = range(6000,6506)
 yozilist = range(1523,1544)
 mrfzlist = range(5001,5178)
@@ -325,6 +326,7 @@ dlcdict = {
         'blda':bldalist,
         'zjjb':zjjblist,
         'blhx':blhxlist,
+        'kgqgj':kgqgjlist,
         'yozi':yozilist,
         'mrfz':mrfzlist,
         #'genshin':genshinlist,
@@ -337,6 +339,7 @@ dlcintro = {
         'blda':'碧蓝档案角色包',
         'zjjb':'机动战姬·聚变角色包',
         'blhx':'碧蓝航线手游角色包。',
+        'kgqgj':'坎特伯雷公主与骑士唤醒冠军之剑的奇幻冒险',
         'yozi':'柚子社部分角色包。',
         'mrfz':'明日方舟角色包。',
         #'genshin':'原神角色包。',
@@ -762,7 +765,7 @@ def get_card_ce(gid,uid,cid):
     #获取角色等级
     zslevel = CE._get_zhuansheng(gid, uid, cid)
     zljcadd = zslevel*50
-    zlzf = 1+(zslevel/10)
+    zlzf = 1+((zslevel+zslevel-1)/10)
     level_info = CE._get_card_level(gid, uid, cid)
     level_ce = level_info*50+level_info*zljcadd
     
@@ -794,7 +797,7 @@ def get_card_ce(gid,uid,cid):
 def get_power_rank(gid):
     duel = DuelCounter()
     CE = CECounter()
-    girls = CE._get_cards_byrank(gid,20)
+    girls = CE._get_cards_byrank(gid,50)
     if len(girls)>0:
         data = sorted(girls,key=lambda cus:cus[1],reverse=True)
         new_data = []
