@@ -765,7 +765,10 @@ def get_card_ce(gid,uid,cid):
     #获取角色等级
     zslevel = CE._get_zhuansheng(gid, uid, cid)
     zljcadd = zslevel*50
-    zlzf = 1+((zslevel+zslevel-1)/10)
+    if zslevel>0:
+        zlzf = 1+((zslevel+zslevel-1)/10)
+    else:
+        zlzf = 1
     level_info = CE._get_card_level(gid, uid, cid)
     level_ce = level_info*50+level_info*zljcadd
     

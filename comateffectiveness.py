@@ -221,33 +221,41 @@ async def up_rank(bot, ev: CQEvent):
             removelist[0][1] = equipinfo['model']
             removelist[0][1] += equipinfo['name']
             lowest[0] = equipinfo['level']
-            print(f'准备移除1号{removelist[0][0]}{removelist[0][1]}')
+            #print(f'准备移除1号{removelist[0][0]}{removelist[0][1]}')
             continue
         if equipinfo['type_id'] == 2 and equipinfo['level'] >= needlevel and equipinfo['level'] < lowest[1]:
             removelist[1][0] = equipinfo['eid']
             removelist[1][1] = equipinfo['model']
             removelist[1][1] += equipinfo['name']
             lowest[1] = equipinfo['level']
-            print(f'准备移除2号{removelist[1][0]}{removelist[1][1]}')
+            #print(f'准备移除2号{removelist[1][0]}{removelist[1][1]}')
             continue
         if equipinfo['type_id'] == 3 and equipinfo['level'] >= needlevel and equipinfo['level'] < lowest[2]:
             removelist[2][0] = equipinfo['eid']
             removelist[2][1] = equipinfo['model']
             removelist[2][1] += equipinfo['name']
             lowest[2] = equipinfo['level']
-            print(f'准备移除3号{removelist[2][0]}{removelist[2][1]}')
+            #print(f'准备移除3号{removelist[2][0]}{removelist[2][1]}')
             continue
         if equipinfo['type_id'] == 4 and equipinfo['level'] >= needlevel and equipinfo['level'] < lowest[3]:
             removelist[3][0] = equipinfo['eid']
             removelist[3][1] = equipinfo['model']
             removelist[3][1] += equipinfo['name']
             lowest[3] = equipinfo['level']
-            print(f'准备移除4号{removelist[3][0]}{removelist[3][1]}')
+            #print(f'准备移除4号{removelist[3][0]}{removelist[3][1]}')
             continue
     part_msg = '\n自动为您消耗了女友身上或装备仓库中，满足升rank条件的较差装备：\n'
     for i in removelist:
         part_msg += f'{i[1]} '
         CE._add_equip(gid, uid, i[0], -1)
+    
+    for eid in dreeslist:
+        equipinfo = get_equip_info_id(eid)
+        if equipinfo:
+            if CE._get_equip_num(gid,uid,equipinfo['eid'])>0:
+                CE._dress_equip(gid, uid, cid, equipinfo['type_id'], eid)
+                CE._add_equip(gid, uid, equipinfo['eid'], -1)
+    
     
     score_counter._reduce_score(gid, uid, rank_score)
     CE._up_rank(gid,uid,cid)

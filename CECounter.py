@@ -113,8 +113,6 @@ class CECounter:
         try:
             r = self._connect().execute("SELECT LEVEL FROM EXPTABLE WHERE GID=? AND UID=? AND CID=?", (gid, uid,cid)).fetchone()
             if r is None:
-               CE = CECounter()
-               CE._set_card_exp(gid,uid,cid)
                return 0
             return r[0]
         except Exception as e:
@@ -126,8 +124,6 @@ class CECounter:
         try:
             r = self._connect().execute("SELECT EXP FROM EXPTABLE WHERE GID=? AND UID=? AND CID=?", (gid, uid,cid)).fetchone()
             if r is None:
-               CE = CECounter()
-               CE._set_card_exp(gid,uid,cid)
                return 0
             return r[0]
         except Exception as e:
