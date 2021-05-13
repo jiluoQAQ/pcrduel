@@ -502,7 +502,10 @@ def get_newgirl_list(gid):
 def add_exp(gid,uid,cid,exp):
     CE = CECounter()
     zslevel = CE._get_zhuansheng(gid, uid, cid)
-    expzf = 1+(zslevel/10)
+    if zslevel>0:
+        expzf = 1+((zslevel+zslevel-1)/10)
+    else:
+        expzf = 1
     now_level = CE._get_card_level(gid, uid, cid)
     level_flag = 0
     need_exp = math.ceil((now_level+1)*100*expzf)
@@ -771,16 +774,32 @@ def get_card_ce(gid,uid,cid):
         zlzf = 1
     level_info = CE._get_card_level(gid, uid, cid)
     level_ce = level_info*50+level_info*zljcadd
-    
+    favor= duel._get_favor(gid,uid,cid)
     #获取角色穿戴装备列表
     equip_ce = 0
     dreeslist = CE._get_dress_list(gid, uid, cid)
     for eid in dreeslist:
         equipinfo = get_equip_info_id(eid)
         if equipinfo:
-            equip_ce = equip_ce + equipinfo['add_ce']
+            if equipinfo['type_id'] == 99:
+                if equipinfo['eid'] == 9999:
+                    favor_jc = math.ceil(favor/2500)
+                    if favor_jc == 0:
+                        favor_jc = 1
+                    if favor_jc>5:
+                        favor_jc = 5
+                    equip_ce = equip_ce + equipinfo['add_ce']*favor_jc
+                elif equipinfo['eid'] == 10000:
+                    zhuans_jc = zslevel
+                    if zhuans_jc == 0:
+                        zhuans_jc = 1
+                    if zslevel>5:
+                        zhuans_jc = 5
+                    equip_ce = equip_ce + equipinfo['add_ce']*zhuans_jc
+            else:
+                equip_ce = equip_ce + equipinfo['add_ce']
     #获取角色好感信息
-    favor= duel._get_favor(gid,uid,cid)
+    
     #计算角色好感战力加成
     favor_ce = math.ceil(favor/500*200)
     #获取角色星级

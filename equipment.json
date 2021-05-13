@@ -826,7 +826,7 @@
 				"type":"移动",
 				"name":"阿拉伯飞毯",
 				"add_ce":180,
-				"dun_score":200
+				"dun_score":0
 			},
 			"10":{  
 				"eid":67,
@@ -835,7 +835,7 @@
 				"type":"移动",
 				"name":"小熊车",
 				"add_ce":180,
-				"dun_score":200
+				"dun_score":0
 			},
 			"11":{  
 				"eid":68,
@@ -1006,7 +1006,7 @@
 				"type":"防具",
 				"name":"破旧的红围巾",
 				"add_ce":180,
-				"dun_score":200
+				"dun_score":0
 			},
 			"30":{  
 				"eid":166,
@@ -1184,7 +1184,7 @@
 	"4":{
 		"level":4,
 		"model":"SSR",
-		"eid":[85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,129,130,131,132,133,134,185,186,187,188,189,190,191,192,193,194,203,210,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227],
+		"eid":[85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,129,130,131,132,133,134,185,186,187,188,189,190,191,192,193,194,203,210,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,256,257,258,259,261,262,263,264,268,269,270,271,272,273,274,275,276,277,307,308,309,310,311],
 		"e_list":{
 		    "1":{  
 				"eid":85,
@@ -1227,7 +1227,7 @@
 				"level":4,
 				"type_id":3,
 				"type":"衣服",
-				"name":"黑白魔女服",
+				"name":"BUG",
 				"add_ce":350,
 				"dun_score":0
 			},
@@ -1272,7 +1272,7 @@
 				"level":4,
 				"type_id":4,
 				"type":"移动",
-				"name":"特制飞行扫把",
+				"name":"BUG",
 				"add_ce":350,
 				"dun_score":0
 			},
@@ -1281,7 +1281,7 @@
 				"level":4,
 				"type_id":1,
 				"type":"防具",
-				"name":"大魔法帽",
+				"name":"BUG",
 				"add_ce":350,
 				"dun_score":0
 			},
@@ -1346,7 +1346,7 @@
 				"type":"防具",
 				"name":"秘籍「金钟罩」",
 				"add_ce":350,
-				"dun_score":700
+				"dun_score":0
 			},
 			"19":{  
 				"eid":103,
@@ -1373,7 +1373,7 @@
 				"type":"衣服",
 				"name":"丝质睡衣",
 				"add_ce":300,
-				"dun_score":700
+				"dun_score":0
 			},
 			"22":{  
 				"eid":106,
@@ -1698,13 +1698,238 @@
 				"name":"携带式隙间",
 				"add_ce":500,
 				"dun_score":0
+			},
+			"58":{  
+				"eid":256,
+				"level":4,
+				"type_id":1,
+				"type":"防具",
+				"name":"小虫风暴",
+				"add_ce":420,
+				"dun_score":0
+			},
+			"59":{  
+				"eid":257,
+				"level":4,
+				"type_id":2,
+				"type":"武器",
+				"name":"萤火流星",
+				"add_ce":420,
+				"dun_score":0
+			},
+			"60":{  
+				"eid":258,
+				"level":4,
+				"type_id":3,
+				"type":"衣服",
+				"name":"虫翼披风",
+				"add_ce":420,
+				"dun_score":0
+			},
+			"61":{  
+				"eid":259,
+				"level":4,
+				"type_id":4,
+				"type":"移动",
+				"name":"蝶雨",
+				"add_ce":420,
+				"dun_score":0
+			},
+			"62":{  
+				"eid":261,
+				"level":4,
+				"type_id":1,
+				"type":"防具",
+				"name":"夜雀头饰",
+				"add_ce":430,
+				"dun_score":0
+			},
+			"63":{  
+				"eid":262,
+				"level":4,
+				"type_id":2,
+				"type":"移动",
+				"name":"电吉他",
+				"add_ce":430,
+				"dun_score":0
+			},
+			"64":{  
+				"eid":263,
+				"level":4,
+				"type_id":3,
+				"type":"衣服",
+				"name":"烧烤用围裙",
+				"add_ce":430,
+				"dun_score":0
+			},
+			"65":{  
+				"eid":264,
+				"level":4,
+				"type_id":4,
+				"type":"移动",
+				"name":"夜雀之翼",
+				"add_ce":430,
+				"dun_score":0
+			},
+			"66":{  
+				"eid":268,
+				"level":4,
+				"type_id":3,
+				"type":"衣服",
+				"name":"文明长卷",
+				"add_ce":450,
+				"dun_score":0
+			},
+			"67":{  
+				"eid":269,
+				"level":4,
+				"type_id":4,
+				"type":"移动",
+				"name":"一条归桥",
+				"add_ce":450,
+				"dun_score":0
+			},
+			"68":{  
+				"eid":270,
+				"level":4,
+				"type_id":1,
+				"type":"防具",
+				"name":"博丽符札",
+				"add_ce":500,
+				"dun_score":0
+			},
+			"69":{  
+				"eid":271,
+				"level":4,
+				"type_id":2,
+				"type":"武器",
+				"name":"封魔针",
+				"add_ce":500,
+				"dun_score":0
+			},
+			"70":{  
+				"eid":272,
+				"level":4,
+				"type_id":3,
+				"type":"衣服",
+				"name":"染血巫女服",
+				"add_ce":500,
+				"dun_score":0
+			},
+			"71":{  
+				"eid":273,
+				"level":4,
+				"type_id":4,
+				"type":"移动",
+				"name":"阴阳宝玉",
+				"add_ce":500,
+				"dun_score":0
+			},
+			"72":{  
+				"eid":274,
+				"level":4,
+				"type_id":1,
+				"type":"防具",
+				"name":"大魔法帽",
+				"add_ce":500,
+				"dun_score":0
+			},
+			"73":{  
+				"eid":275,
+				"level":4,
+				"type_id":2,
+				"type":"武器",
+				"name":"重生态魔法炸弹",
+				"add_ce":500,
+				"dun_score":0
+			},
+			"74":{  
+				"eid":276,
+				"level":4,
+				"type_id":3,
+				"type":"衣服",
+				"name":"黑白魔女服",
+				"add_ce":500,
+				"dun_score":0
+			},
+			"75":{  
+				"eid":277,
+				"level":4,
+				"type_id":4,
+				"type":"移动",
+				"name":"特制飞行扫把",
+				"add_ce":500,
+				"dun_score":0
+			},
+			"76":{  
+				"eid":286,
+				"level":4,
+				"type_id":2,
+				"type":"武器",
+				"name":"河童制黄金镐头",
+				"add_ce":451,
+				"dun_score":0
+			},
+			"77":{  
+				"eid":287,
+				"level":4,
+				"type_id":4,
+				"type":"移动",
+				"name":"河童制黄金挖掘机",
+				"add_ce":451,
+				"dun_score":0
+			},
+			"78":{  
+				"eid":307,
+				"level":4,
+				"type_id":4,
+				"type":"特殊",
+				"name":"预备弹药",
+				"add_ce":460,
+				"dun_score":0
+			},
+			"79":{  
+				"eid":308,
+				"level":4,
+				"type_id":4,
+				"type":"特殊",
+				"name":"壶中的大银河",
+				"add_ce":480,
+				"dun_score":0
+			},
+			"80":{  
+				"eid":309,
+				"level":4,
+				"type_id":3,
+				"type":"衣服",
+				"name":"吊带灯笼裤",
+				"add_ce":500,
+				"dun_score":0
+			},
+			"81":{  
+				"eid":310,
+				"level":4,
+				"type_id":1,
+				"type":"防具",
+				"name":"四十叶的三叶草",
+				"add_ce":480,
+				"dun_score":0
+			},
+			"82":{  
+				"eid":311,
+				"level":4,
+				"type_id":3,
+				"type":"衣服",
+				"name":"胡萝卜吊坠",
+				"add_ce":460,
+				"dun_score":0
 			}
 		}
 	},
 	"5":{
 		"level":5,
 		"model":"UR",
-		"eid":[108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,195,196,197,198,199,200,201,202,204,205,206,207,208,209,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245],
+		"eid":[108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,195,196,197,198,199,200,201,202,204,205,206,207,208,209,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242,243,244,245,246,260,265,266,267,278,279,280,282,283,284,285,288,289,290,291,292,293,294,295,296,297,298,299,300,301,302,303,304,305,306,312,313,314,315,316,317,318,319,320],
 		"e_list":{
 		    "1":{  
 				"eid":108,
@@ -1712,7 +1937,7 @@
 				"type_id":2,
 				"type":"武器",
 				"name":"迷你八卦炉",
-				"add_ce":550,
+				"add_ce":650,
 				"dun_score":0
 			},
 			"2":{  
@@ -1730,7 +1955,7 @@
 				"type_id":2,
 				"type":"武器",
 				"name":"博丽御币",
-				"add_ce":600,
+				"add_ce":650,
 				"dun_score":0
 			},
 			"4":{  
@@ -1739,7 +1964,7 @@
 				"type_id":1,
 				"type":"防具",
 				"name":"大红蝴蝶结",
-				"add_ce":600,
+				"add_ce":650,
 				"dun_score":0
 			},
 			"5":{  
@@ -1748,7 +1973,7 @@
 				"type_id":3,
 				"type":"衣服",
 				"name":"红白巫女服",
-				"add_ce":600,
+				"add_ce":650,
 				"dun_score":0
 			},
 			"6":{  
@@ -1793,7 +2018,7 @@
 				"type_id":4,
 				"type":"移动",
 				"name":"博丽飞行术",
-				"add_ce":600,
+				"add_ce":650,
 				"dun_score":0
 			},
 			"11":{  
@@ -2182,13 +2407,373 @@
 				"name":"隙间废弃列车",
 				"add_ce":650,
 				"dun_score":0
+			},
+			"54":{  
+				"eid":260,
+				"level":5,
+				"type_id":4,
+				"type":"移动",
+				"name":"夜雀烧烤摊",
+				"add_ce":570,
+				"dun_score":0
+			},
+			"55":{  
+				"eid":265,
+				"level":5,
+				"type_id":4,
+				"type":"移动",
+				"name":"神器-八尺琼勾玉",
+				"add_ce":635,
+				"dun_score":0
+			},
+			"56":{  
+				"eid":266,
+				"level":5,
+				"type_id":1,
+				"type":"防具",
+				"name":"神器-八咫镜",
+				"add_ce":635,
+				"dun_score":0
+			},
+			"57":{  
+				"eid":267,
+				"level":5,
+				"type_id":2,
+				"type":"武器",
+				"name":"神器-天丛云剑",
+				"add_ce":635,
+				"dun_score":0
+			},
+			"58":{  
+				"eid":278,
+				"level":5,
+				"type_id":1,
+				"type":"防具",
+				"name":"星辰结界",
+				"add_ce":650,
+				"dun_score":0
+			},
+			"59":{  
+				"eid":279,
+				"level":5,
+				"type_id":3,
+				"type":"衣服",
+				"name":"爱丽丝特制披肩",
+				"add_ce":650,
+				"dun_score":0
+			},
+			"60":{  
+				"eid":280,
+				"level":5,
+				"type_id":4,
+				"type":"移动",
+				"name":"*彗星*",
+				"add_ce":650,
+				"dun_score":0
+			},
+			"61":{  
+				"eid":282,
+				"level":5,
+				"type_id":1,
+				"type":"防具",
+				"name":"霍青娥的黄金发饰",
+				"add_ce":666,
+				"dun_score":0
+			},
+			"62":{  
+				"eid":283,
+				"level":5,
+				"type_id":1,
+				"type":"防具",
+				"name":"神子的黄金面具",
+				"add_ce":666,
+				"dun_score":0
+			},
+			"63":{  
+				"eid":284,
+				"level":5,
+				"type_id":2,
+				"type":"武器",
+				"name":"米斯蒂娅的黄金烤串",
+				"add_ce":666,
+				"dun_score":0
+			},
+			"64":{  
+				"eid":285,
+				"level":5,
+				"type_id":4,
+				"type":"移动",
+				"name":"村纱水蜜的黄金战舰",
+				"add_ce":666,
+				"dun_score":0
+			},
+			"65":{  
+				"eid":312,
+				"level":5,
+				"type_id":1,
+				"type":"防具",
+				"name":"离圆花冠",
+				"add_ce":630,
+				"dun_score":0
+			},
+			"66":{  
+				"eid":313,
+				"level":5,
+				"type_id":2,
+				"type":"武器",
+				"name":"喇叭枪",
+				"add_ce":630,
+				"dun_score":0
+			},
+			"67":{  
+				"eid":288,
+				"level":5,
+				"type_id":3,
+				"type":"衣服",
+				"name":"兔耳高中生制服",
+				"add_ce":630,
+				"dun_score":0
+			},
+			"68":{  
+				"eid":289,
+				"level":5,
+				"type_id":4,
+				"type":"移动",
+				"name":"胧月花栞",
+				"add_ce":640,
+				"dun_score":0
+			},
+			"69":{  
+				"eid":290,
+				"level":5,
+				"type_id":4,
+				"type":"特殊",
+				"name":"国士无双之药",
+				"add_ce":650,
+				"dun_score":0
+			},
+			"70":{  
+				"eid":291,
+				"level":5,
+				"type_id":1,
+				"type":"防具",
+				"name":"水银之海",
+				"add_ce":650,
+				"dun_score":0
+			},
+			"71":{  
+				"eid":292,
+				"level":5,
+				"type_id":2,
+				"type":"武器",
+				"name":"月弓",
+				"add_ce":650,
+				"dun_score":0
+			},
+			"72":{  
+				"eid":293,
+				"level":5,
+				"type_id":3,
+				"type":"衣服",
+				"name":"北斗七星服",
+				"add_ce":650,
+				"dun_score":0
+			},
+			"73":{  
+				"eid":294,
+				"level":5,
+				"type_id":4,
+				"type":"移动",
+				"name":"阿波罗11号",
+				"add_ce":650,
+				"dun_score":0
+			},
+			"74":{  
+				"eid":295,
+				"level":5,
+				"type_id":4,
+				"type":"特殊",
+				"name":"八意的秘药",
+				"add_ce":670,
+				"dun_score":0
+			},
+			"75":{  
+				"eid":296,
+				"level":5,
+				"type_id":1,
+				"type":"防具",
+				"name":"佛御石之钵",
+				"add_ce":660,
+				"dun_score":0
+			},
+			"76":{  
+				"eid":297,
+				"level":5,
+				"type_id":2,
+				"type":"武器",
+				"name":"蓬莱的玉枝",
+				"add_ce":670,
+				"dun_score":0
+			},
+			"77":{  
+				"eid":298,
+				"level":5,
+				"type_id":3,
+				"type":"衣服",
+				"name":"火鼠的皮衣",
+				"add_ce":660,
+				"dun_score":0
+			},
+			"78":{  
+				"eid":299,
+				"level":5,
+				"type_id":4,
+				"type":"移动",
+				"name":"燕的子安贝",
+				"add_ce":660,
+				"dun_score":0
+			},
+			"79":{  
+				"eid":300,
+				"level":5,
+				"type_id":4,
+				"type":"特殊",
+				"name":"龙颈之玉",
+				"add_ce":660,
+				"dun_score":0
+			},
+			"80":{  
+				"eid":301,
+				"level":5,
+				"type_id":1,
+				"type":"防具",
+				"name":"辟火符札",
+				"add_ce":670,
+				"dun_score":0
+			},
+			"81":{  
+				"eid":302,
+				"level":5,
+				"type_id":2,
+				"type":"武器",
+				"name":"不朽的弹幕",
+				"add_ce":670,
+				"dun_score":0
+			},
+			"82":{  
+				"eid":303,
+				"level":5,
+				"type_id":3,
+				"type":"衣服",
+				"name":"不死鸟之羽",
+				"add_ce":670,
+				"dun_score":0
+			},
+			"83":{  
+				"eid":304,
+				"level":5,
+				"type_id":4,
+				"type":"移动",
+				"name":"凯风快晴",
+				"add_ce":670,
+				"dun_score":0
+			},
+			"84":{  
+				"eid":305,
+				"level":5,
+				"type_id":2,
+				"type":"武器",
+				"name":"开运大纹",
+				"add_ce":639,
+				"dun_score":0
+			},
+			"85":{  
+				"eid":306,
+				"level":5,
+				"type_id":4,
+				"type":"移动",
+				"name":"幸运兔脚",
+				"add_ce":620,
+				"dun_score":0
+			},
+			"86":{  
+				"eid":314,
+				"level":5,
+				"type_id":1,
+				"type":"防具",
+				"name":"深绿色钢盔",
+				"add_ce":690,
+				"dun_score":0
+			},
+			"87":{  
+				"eid":315,
+				"level":5,
+				"type_id":3,
+				"type":"衣服",
+				"name":"蔷薇花裙",
+				"add_ce":690,
+				"dun_score":0
+			},
+			"88":{  
+				"eid":316,
+				"level":5,
+				"type_id":4,
+				"type":"特殊",
+				"name":"紧闭的恋之瞳",
+				"add_ce":700,
+				"dun_score":0
+			},
+			"89":{  
+				"eid":317,
+				"level":5,
+				"type_id":4,
+				"type":"移动",
+				"name":"带刺的蔷薇园",
+				"add_ce":690,
+				"dun_score":0
+			},
+			"90":{  
+				"eid":318,
+				"level":5,
+				"type_id":4,
+				"type":"移动",
+				"name":"梅丽的电话",
+				"add_ce":700,
+				"dun_score":0
+			},
+			"91":{  
+				"eid":319,
+				"level":5,
+				"type_id":2,
+				"type":"武器",
+				"name":"妖怪测谎仪",
+				"add_ce":690,
+				"dun_score":0
+			},
+			"92":{  
+				"eid":320,
+				"level":5,
+				"type_id":2,
+				"type":"武器",
+				"name":"梅丽的菜刀",
+				"add_ce":700,
+				"dun_score":0
+			},
+			"93":{  
+				"eid":246,
+				"level":5,
+				"type_id":3,
+				"type":"衣服",
+				"name":"三日月和服",
+				"add_ce":650,
+				"dun_score":0
 			}
 		}
 	},
 	"6":{
 		"level":6,
 		"model":"MR",
-		"eid":[136],
+		"eid":[136,255,247,248,249,250,251,252,253,254,9999,10000],
 		"e_list":{
 		    "1":{  
 				"eid":136,
@@ -2197,6 +2782,105 @@
 				"type":"武器",
 				"name":"红之魂",
 				"add_ce":750,
+				"dun_score":0
+			},
+			"2":{  
+				"eid":255,
+				"level":6,
+				"type_id":1,
+				"type":"防具",
+				"name":"妖之记忆",
+				"add_ce":750,
+				"dun_score":0
+			},
+			"3":{  
+				"eid":247,
+				"level":6,
+				"type_id":1,
+				"type":"防具",
+				"name":"宿星的加护",
+				"add_ce":1000,
+				"dun_score":0
+			},
+			"4":{  
+				"eid":248,
+				"level":6,
+				"type_id":2,
+				"type":"武器",
+				"name":"巨星·安塔雷斯",
+				"add_ce":1000,
+				"dun_score":0
+			},
+			"5":{  
+				"eid":249,
+				"level":6,
+				"type_id":3,
+				"type":"衣服",
+				"name":"红之魔女服",
+				"add_ce":1000,
+				"dun_score":0
+			},
+			"6":{  
+				"eid":250,
+				"level":6,
+				"type_id":4,
+				"type":"移动",
+				"name":"红梦的世界",
+				"add_ce":1000,
+				"dun_score":0
+			},
+			"7":{  
+				"eid":251,
+				"level":6,
+				"type_id":1,
+				"type":"武器",
+				"name":"草早楼观剑",
+				"add_ce":1250,
+				"dun_score":0
+			},
+			"8":{  
+				"eid":252,
+				"level":6,
+				"type_id":2,
+				"type":"武器",
+				"name":"雷切白楼剑",
+				"add_ce":1250,
+				"dun_score":0
+			},
+			"9":{  
+				"eid":253,
+				"level":6,
+				"type_id":3,
+				"type":"衣服",
+				"name":"黑之庭师服",
+				"add_ce":1250,
+				"dun_score":0
+			},
+			"10":{  
+				"eid":254,
+				"level":6,
+				"type_id":4,
+				"type":"移动",
+				"name":"一本樱·满开",
+				"add_ce":1250,
+				"dun_score":0
+			},
+			"11":{
+				"eid":9999,
+				"level":6,
+				"type_id":99,
+				"type":"戒指",
+				"name":"永恒的守护",
+				"add_ce":1000,
+				"dun_score":0
+			},
+			"12":{  
+				"eid":10000,
+				"level":6,
+				"type_id":99,
+				"type":"戒指",
+				"name":"世世的相随",
+				"add_ce":1000,
 				"dun_score":0
 			}
 		}

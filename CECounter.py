@@ -561,7 +561,7 @@ class CECounter:
         with self._connect() as conn:
             r = conn.execute(
                 f"SELECT XNUM,DNUM,UNUM FROM EQUIPGECHA WHERE GID={gid} AND UID={uid}").fetchall()
-            return r[0] if r else [0,0]
+            return r[0] if r else [0,0,0]
     
     def _add_gecha_num(self, gid, uid, xnum, dnum, unum):
         with self._connect() as conn:

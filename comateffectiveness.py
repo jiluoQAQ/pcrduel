@@ -208,7 +208,7 @@ async def up_rank(bot, ev: CQEvent):
     
     for eid in dreeslist:
         equipinfo = get_equip_info_id(eid)
-        if equipinfo:
+        if equipinfo and equipinfo['type_id']!=99:
             CE._dress_equip(gid, uid, cid, equipinfo['type_id'], 0)
             CE._add_equip(gid, uid, equipinfo['eid'], 1)
     equip_list = CE._get_equip_list(gid, uid)
@@ -252,7 +252,7 @@ async def up_rank(bot, ev: CQEvent):
     for eid in dreeslist:
         equipinfo = get_equip_info_id(eid)
         if equipinfo:
-            if CE._get_equip_num(gid,uid,equipinfo['eid'])>0:
+            if CE._get_equip_num(gid,uid,equipinfo['eid'])>0 and equipinfo['type_id']!=99:
                 CE._dress_equip(gid, uid, cid, equipinfo['type_id'], eid)
                 CE._add_equip(gid, uid, equipinfo['eid'], -1)
     
@@ -622,6 +622,7 @@ async def dress_equip(bot, ev: CQEvent):
     gid = ev.group_id
     uid = ev.user_id
     duel = DuelCounter()  
+    CE = CECounter()
     if len(args)!=2:
         await bot.finish(ev, '请输入 穿装备+女友名+装备名 中间用空格隔开。', at_sender=True)
     name = args[0]
@@ -634,8 +635,11 @@ async def dress_equip(bot, ev: CQEvent):
     equipname = args[1]
     equipinfo = get_equip_info_name(equipname)
     if len(equipinfo)>0:
+        if equipinfo['type_id']==99:
+            zllevel = CE._get_zhuansheng(gid,uid,cid)
+            if zllevel==0:
+                await bot.finish(ev, '戒指需要角色转生后才能装备哦。', at_sender=True)    
         c = chara.fromid(cid)
-        CE = CECounter()
         if CE._get_equip_num(gid,uid,equipinfo['eid'])==0:
             await bot.finish(ev, '你的这件装备的库存不足哦。', at_sender=True)
         #获取当前穿戴的装备
@@ -733,10 +737,11 @@ async def dress_equip_list(bot, ev: CQEvent):
         msg = '您还未在本群创建过贵族，请发送 创建贵族 开始您的贵族之旅。'
         await bot.send(ev, msg, at_sender=True)
         return
-    
+    zllevel = CE._get_zhuansheng(gid,uid,cid)
     equip_list = CE._get_equip_list(gid, uid)
     #记录不同部位的品质最高装备的品质和eid
-    emax = [[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
+    emax = [[0,0,0],[0,0,0],[0,0,0],[0,0,0],[0,0,0]]
+    tsequipflag = 0
     if len(equip_list)>0:
         msg_list = '我的装备列表：'
         for i in equip_list:
@@ -749,6 +754,9 @@ async def dress_equip_list(bot, ev: CQEvent):
                 emax[2] = [equipinfo['level'],i[0],equipinfo['add_ce']]
             if equipinfo['type_id'] == 4 and equipinfo['level'] > emax[3][0] and equipinfo['add_ce'] > emax[3][2]:
                 emax[3] = [equipinfo['level'],i[0],equipinfo['add_ce']]
+            if zllevel>0 and equipinfo['type_id'] == 99 and equipinfo['level'] > emax[3][0] and equipinfo['add_ce'] > emax[3][2]:
+                emax[4] = [equipinfo['level'],i[0],equipinfo['add_ce']]
+                
     else:
         await bot.finish(ev, '您还没有获得装备哦。', at_sender=True)
     c = chara.fromid(cid)
@@ -1898,7 +1906,7 @@ async def my_teamlst(bot, ev: CQEvent):
         bio = BytesIO()
         res.save(bio, format='PNG')
         base64_str = 'base64://' + base64.b64encode(bio.getvalue()).decode()
-        mes = f"[CQ:image,file={base64_str}]"
+        mes = f"[CQ:image,file={base64_str}]\n"
         msg = msg + f"队伍名称：{teamname}\n队伍成员：{bianzu}\n队伍战力：{z_ce}\n{mes}"
     await bot.send(ev, msg, at_sender=True)
         
@@ -1961,7 +1969,7 @@ async def xiulian_end(bot, ev: CQEvent):
         jgtime = 86400
     xlmin = math.ceil(jgtime/60)
     sj_msg = sj_msg + f"修炼时间为{xlmin}分钟，"
-    addexp = xlmin*10
+    addexp = xlmin*50
     card_level=add_exp(gid,uid,guajiinfo[0],addexp)
     CE._delete_xiulian(gid,uid)
     c = chara.fromid(guajiinfo[0])
@@ -2127,7 +2135,9 @@ async def add_equip_gecha(bot, ev: CQEvent):
         last_score = myscore - need_dunscore
         need_score = 0-need_dunscore
         CE._add_dunscore(gid, uid, need_score)
-        msg = f"消耗{need_dunscore}副本币，剩余副本币{last_score}\n本次{args[0]}获得的装备为：{getequip}"
+        add_exp = gechanum*500
+        CE._add_exp_chizi(gid, uid, add_exp)
+        msg = f"消耗{need_dunscore}副本币，剩余副本币{last_score}\n获得经验{add_exp}，已加入经验池\n本次{args[0]}获得的装备为：{getequip}"
         await bot.send(ev, msg, at_sender=True)
     else:
         await bot.finish(ev, '请输入正确的武器池名称。', at_sender=True)
@@ -2234,6 +2244,26 @@ async def xingchen_change(bot, ev: CQEvent):
         now_num = CE._add_xingchen_num(gid, uid, -300)
         CE._add_equip(gid, uid, equipinfo['eid'], 1)
         msg = f"您消耗了300星尘，成功兑换了装备{args[0]}，剩余星尘{now_num}"
+        await bot.send(ev, msg, at_sender=True)
+    else:
+        await bot.finish(ev, '请输入正确的装备名称。', at_sender=True)
+
+@sv.on_prefix(['兑换戒指'])
+async def xingchen_jz(bot, ev: CQEvent):
+    args = ev.message.extract_plain_text().split()
+    gid = ev.group_id
+    uid = ev.user_id
+    CE = CECounter()
+    if len(args)!=1:
+        await bot.finish(ev, '请输入 兑换戒指+戒指名称[永恒的守护/世世的相随] 中间用空格隔开。', at_sender=True)
+    xc_num = CE._get_xingchen_num(gid, uid)
+    if xc_num<500:
+        await bot.finish(ev, f'您的星尘剩余{xc_num}，不足500，无法兑换哦。', at_sender=True)
+    equipinfo = get_equip_info_name(args[0])
+    if len(equipinfo)>0:
+        now_num = CE._add_xingchen_num(gid, uid, -500)
+        CE._add_equip(gid, uid, equipinfo['eid'], 1)
+        msg = f"您消耗了500星尘，成功兑换了戒指 {args[0]}，剩余星尘{now_num}"
         await bot.send(ev, msg, at_sender=True)
     else:
         await bot.finish(ev, '请输入正确的装备名称。', at_sender=True)
@@ -2583,7 +2613,9 @@ async def my_fragment_list(bot, ev: CQEvent):
         await bot.send(ev, msg_list, at_sender=True)
     else:
         await bot.finish(ev, '您还没有获得角色碎片哦。', at_sender=True)
-    
+
+
+
 @sv.on_prefix(['角色升星','星级提升'])
 async def cardstar_up(bot, ev: CQEvent):
     args = ev.message.extract_plain_text().split()
@@ -2633,7 +2665,81 @@ async def cardstar_up(bot, ev: CQEvent):
         msg = f"您消耗了{card_fragment}{name}碎片,{need_wn}万能碎片"
     CE._add_cardstar(gid, uid, cid)
     await bot.send(ev, f'升星成功！\n{msg}\n成功将您的女友{name}升到了{new_star}星,女友战斗力大大提升！{nvmes}', at_sender=True)
+
+@sv.on_fullmatch(['碎片一键兑换经验'])
+async def fragment_exp_all(bot, ev: CQEvent):
+    gid = ev.group_id
+    uid = ev.user_id
+    duel = DuelCounter() 
+    CE = CECounter()
+    if duel._get_level(gid, uid) == 0:
+        msg = '您还未在本群创建过贵族，请发送 创建贵族 开始您的贵族之旅。'
+        await bot.send(ev, msg, at_sender=True)
+        return
+    equip_list = CE._get_fragment_list(gid, uid)
+    if len(equip_list)>0:
+        add_exp = 0
+        msg_list = '兑换成功！消耗了'
+        for i in equip_list:
+            if i[0]==0:
+                name = '万能'
+                add_exp = add_exp + i[1] * 2000
+                wnnum = 0-i[1]
+                CE._add_fragment_num(gid, uid, 0, wnnum)
+            else:
+                c = chara.fromid(i[0])
+                name = c.name
+                add_exp = add_exp + i[1] * 1000
+                delete_num = 0-i[1]
+                CE._add_fragment_num(gid, uid, i[0], delete_num)
+            msg_list = msg_list + f"\n{name}碎片:{i[1]}"
+        CE._add_exp_chizi(gid, uid, add_exp)
+        msg_list = msg_list + f"\n累计获得{add_exp}经验"
+        await bot.send(ev, msg_list, at_sender=True)
+    else:
+        await bot.finish(ev, '您还没有获得角色碎片哦。', at_sender=True)
+
+@sv.on_rex(f'^用(.*)片(.*)碎片兑换经验$')
+async def fragment_exp(bot, ev: CQEvent):
+    gid = ev.group_id
+    uid = ev.user_id
+    duel = DuelCounter()
+    CE = CECounter()
+    # 处理输入数据
+    match = ev['match']
+
+    name = str(match.group(2))
+    if name == '万能':
+        cid = 0
+    else:
+        cid = chara.name2id(name)
+    if cid == 1000:
+        await bot.finish(ev, '请输入正确的pcr角色名1。', at_sender=True)
+
+
+    if match.group(1):
+        num = int(match.group(1))
+        if num > 1:
+            num = num
+        else:
+            num = 1
+    else:
+        num = 1
+        
+    card_fragment = CE._get_fragment_num(gid,uid,cid)
+    if card_fragment<num:
+        await bot.finish(ev, f'{name}碎片不足{num}无法兑换', at_sender=True)
     
+    if cid==0:
+        add_exp = num * 2000
+    else:
+        add_exp = num * 1000
+    
+    fragment_num = 0-num
+    CE._add_exp_chizi(gid, uid, add_exp)
+    CE._add_fragment_num(gid, uid, cid, fragment_num)
+    await bot.send(ev, f'兑换成功！消耗了{num}{name}碎片，获得{add_exp}经验', at_sender=True)
+
 @sv.on_rex(f'^用(.*)碎片兑换(.*)碎片(.*)$')
 async def fragment_duihuan(bot, ev: CQEvent):
     gid = ev.group_id
