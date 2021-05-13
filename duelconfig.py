@@ -598,6 +598,7 @@ def get_equip_info_name(ename):
             if str(ename) == str(equiplist[i]['e_list'][j]['name']):
                 equipinfo = equiplist[i]['e_list'][j]
                 equipinfo['model'] = equiplist[i]['model']
+                equipinfo['icon'] = get_equip_icon(equiplist[i]['e_list'][j]['eid'])
                 fand_flag = 1
                 break
     return equipinfo
@@ -692,6 +693,21 @@ def get_boss_icon(bossname):
         mes = f"[CQ:image,file={base64_str}]"   
     return mes
 
+def get_equip_icon(eid):
+    PIC_PATH = os.path.join(FILE_PATH,'equpimg')
+    path = os.path.join(PIC_PATH,f'{eid}.png')
+    mes = ''
+    if  os.path.exists(path):
+        img = Image.open(path)
+        size = img.size
+        sf_weight = math.ceil(size[0]/(size[1]/60))
+        img = img.resize((sf_weight, 60))
+        bio = BytesIO()
+        img.save(bio, format='PNG')
+        base64_str = 'base64://' + base64.b64encode(bio.getvalue()).decode()
+        mes = f"[CQ:image,file={base64_str}]"   
+    return mes
+
 def get_nextbossinfo(zhoumu,bossid,shijieflag):
     bosslist={}
     with open(os.path.join(FILE_PATH,'bossinfo.json'),'r',encoding='UTF-8') as fa:
@@ -750,6 +766,7 @@ def get_equip_info_id(eid):
             if str(eid) == str(equiplist[i]['e_list'][j]['eid']):
                 equipinfo = equiplist[i]['e_list'][j]
                 equipinfo['model'] = equiplist[i]['model']
+                equipinfo['icon'] = get_equip_icon(equiplist[i]['e_list'][j]['eid'])
                 fand_flag = 1
                 break
     return equipinfo

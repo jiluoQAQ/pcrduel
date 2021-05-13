@@ -676,7 +676,7 @@ async def my_equip_list(bot, ev: CQEvent):
         msg_list = '我的装备列表：'
         for i in equip_list:
             equipinfo=get_equip_info_id(i[0])
-            msg_list = msg_list + f"\n{equipinfo['type']}:({equipinfo['model']}){equipinfo['name']}:{i[1]}件"
+            msg_list = msg_list + f"\n{equipinfo['icon']}{equipinfo['type']}:({equipinfo['model']}){equipinfo['name']}:{i[1]}件"
         await bot.send(ev, msg_list, at_sender=True)
     else:
         await bot.finish(ev, '您还没有获得装备哦。', at_sender=True)

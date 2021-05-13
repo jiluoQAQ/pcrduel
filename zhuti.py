@@ -3100,7 +3100,7 @@ async def my_fashion(bot, ev: CQEvent):
         for eid in dreeslist:
             equipinfo = get_equip_info_id(eid)
             if equipinfo:
-                equip_list = equip_list + f"\n{equipinfo['type']}:{equipinfo['name']}({equipinfo['model']})"
+                equip_list = equip_list + f"\n{equipinfo['icon']}{equipinfo['type']}:{equipinfo['name']}({equipinfo['model']})"
         if equip_list:
             equip_msg = f"\n目前穿戴的装备为:{equip_list}"
         favor= duel._get_favor(gid,uid,cid)
